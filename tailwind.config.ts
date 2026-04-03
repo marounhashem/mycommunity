@@ -132,6 +132,10 @@ const config: Config = {
           950: "#352E23",
         },
       },
+      fontFamily: {
+        sans: ["var(--font-sans)"],
+        heading: ["var(--font-heading)"],
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
