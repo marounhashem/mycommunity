@@ -51,7 +51,7 @@ model User {
   id              String   @id @default(cuid())
   email           String   @unique
   role            Role     @default(OWNER)
-  hashedPassword  String   @map("hashed_password")
+  hashedPassword  String?  @map("hashed_password")
   createdAt       DateTime @default(now()) @map("created_at")
 
   ownedUnits      Unit[]             @relation("UnitOwner")
@@ -203,4 +203,13 @@ model Violation {
   unit Unit @relation(fields: [unitId], references: [id])
 
   @@map("violations")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
 }
