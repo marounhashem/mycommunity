@@ -50,11 +50,11 @@ export const adminLinks: NavLink[] = [
 export function getRoleDashboardPath(role: string): string {
   switch (role) {
     case "OWNER":
-      return "/(owner)/dashboard";
+      return "/owner/dashboard";
     case "MANAGER":
-      return "/(manager)/dashboard";
+      return "/manager/dashboard";
     case "ADMIN":
-      return "/(admin)/dashboard";
+      return "/admin/dashboard";
     default:
       return "/login";
   }
@@ -63,11 +63,11 @@ export function getRoleDashboardPath(role: string): string {
 export function getRoleBasePath(role: string): string {
   switch (role) {
     case "OWNER":
-      return "/(owner)";
+      return "/owner";
     case "MANAGER":
-      return "/(manager)";
+      return "/manager";
     case "ADMIN":
-      return "/(admin)";
+      return "/admin";
     default:
       return "/login";
   }
