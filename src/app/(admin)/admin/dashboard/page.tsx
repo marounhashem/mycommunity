@@ -41,7 +41,7 @@ export default async function AdminDashboard() {
     getVillaCollectionRates(),
   ]);
 
-  const safe = <T>(data: T): T => JSON.parse(JSON.stringify(data));
+  const safe = <T,>(data: T): T => JSON.parse(JSON.stringify(data));
 
   return (
     <div className="space-y-6">
