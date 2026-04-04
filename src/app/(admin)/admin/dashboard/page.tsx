@@ -41,12 +41,7 @@ export default async function AdminDashboard() {
     getVillaCollectionRates(),
   ]);
 
-  // Ensure all data is JSON-serializable (Decimal → number)
-  const safeGaugeData = gaugeData.map(d => ({ ...d }));
-  const safeMonthlyData = monthlyData.map(d => ({ ...d }));
-  const safeTicketData = ticketData.map(d => ({ ...d }));
-  const safeDebtorsData = debtorsData.map(d => ({ ...d }));
-  const safeVillaData = villaData.map(d => ({ ...d }));
+  const safe = <T>(data: T): T => JSON.parse(JSON.stringify(data));
 
   return (
     <div className="space-y-6">
@@ -55,21 +50,21 @@ export default async function AdminDashboard() {
         <p className="text-sm text-muted-foreground mt-1">System administration & reporting</p>
       </div>
 
-      <KpiCards {...kpis} />
+      <KpiCards {...safe(kpis)} />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <CollectionGauge data={safeGaugeData} collectionRate={kpis.collectionRate} />
-        <MonthlyPayments data={safeMonthlyData} />
+        <CollectionGauge data={safe(gaugeData)} collectionRate={kpis.collectionRate} />
+        <MonthlyPayments data={safe(monthlyData)} />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <BudgetTable />
-        <TicketTrend data={safeTicketData} />
+        <TicketTrend data={safe(ticketData)} />
       </div>
 
-      <DebtorsTable data={safeDebtorsData} />
+      <DebtorsTable data={safe(debtorsData)} />
 
-      <VillaCollection data={safeVillaData} />
+      <VillaCollection data={safe(villaData)} />
     </div>
   );
 }

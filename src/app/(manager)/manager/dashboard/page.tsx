@@ -38,10 +38,7 @@ export default async function ManagerDashboard() {
     getTopDebtors(),
   ]);
 
-  const safeGaugeData = gaugeData.map(d => ({ ...d }));
-  const safeMonthlyData = monthlyData.map(d => ({ ...d }));
-  const safeTicketData = ticketData.map(d => ({ ...d }));
-  const safeDebtorsData = debtorsData.map(d => ({ ...d }));
+  const safe = <T>(data: T): T => JSON.parse(JSON.stringify(data));
 
   return (
     <div className="space-y-6">
@@ -50,19 +47,19 @@ export default async function ManagerDashboard() {
         <p className="text-sm text-muted-foreground mt-1">Community management overview</p>
       </div>
 
-      <KpiCards {...kpis} />
+      <KpiCards {...safe(kpis)} />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <CollectionGauge data={safeGaugeData} collectionRate={kpis.collectionRate} />
-        <MonthlyPayments data={safeMonthlyData} />
+        <CollectionGauge data={safe(gaugeData)} collectionRate={kpis.collectionRate} />
+        <MonthlyPayments data={safe(monthlyData)} />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <BudgetTable />
-        <TicketTrend data={safeTicketData} />
+        <TicketTrend data={safe(ticketData)} />
       </div>
 
-      <DebtorsTable data={safeDebtorsData} />
+      <DebtorsTable data={safe(debtorsData)} />
     </div>
   );
 }
