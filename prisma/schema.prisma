@@ -60,6 +60,7 @@ model User {
   ticketComments  TicketComment[]
   announcements   Announcement[]
   approvedRenovations RenovationApplication[] @relation("ApprovedRenovations")
+  notifications   NotificationLog[]
 
   @@map("users")
 }
@@ -166,14 +167,19 @@ model TicketAttachment {
 }
 
 model Announcement {
-  id       String    @id @default(cuid())
-  authorId String    @map("author_id")
-  title    String
-  bodyHtml String    @map("body_html")
-  audience Audience  @default(ALL)
-  sentAt   DateTime? @map("sent_at")
+  id              String    @id @default(cuid())
+  authorId        String    @map("author_id")
+  title           String
+  bodyHtml        String    @map("body_html")
+  audience        Audience  @default(ALL)
+  zoneFilter      String?   @map("zone_filter")
+  unitFilter      String?   @map("unit_filter")
+  attachmentR2Key String?   @map("attachment_r2_key")
+  attachmentName  String?   @map("attachment_name")
+  sentAt          DateTime? @map("sent_at")
 
-  author User @relation(fields: [authorId], references: [id])
+  author        User              @relation(fields: [authorId], references: [id])
+  notifications NotificationLog[]
 
   @@map("announcements")
 }
@@ -214,4 +220,18 @@ model VerificationToken {
 
   @@unique([identifier, token])
   @@map("verification_tokens")
+}
+
+model NotificationLog {
+  id             String    @id @default(cuid())
+  announcementId String    @map("announcement_id")
+  userId         String    @map("user_id")
+  sentAt         DateTime  @default(now()) @map("sent_at")
+  readAt         DateTime? @map("read_at")
+
+  announcement Announcement @relation(fields: [announcementId], references: [id])
+  user         User         @relation(fields: [userId], references: [id])
+
+  @@unique([announcementId, userId])
+  @@map("notification_logs")
 }
