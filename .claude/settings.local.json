@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git pull:*)",
+      "Bash(npx create-next-app@14:*)",
+      "Bash(mkdir /tmp/nextinit)",
+      "Read(//tmp/**)",
+      "Bash(cp -r /tmp/nextinit/myapp/src .)",
+      "Bash(cp -r /tmp/nextinit/myapp/public .)",
+      "Bash(cp /tmp/nextinit/myapp/package.json .)",
+      "Bash(cp /tmp/nextinit/myapp/tsconfig.json .)",
+      "Bash(cp /tmp/nextinit/myapp/next.config.mjs .)",
+      "Bash(cp /tmp/nextinit/myapp/postcss.config.mjs .)",
+      "Bash(cp /tmp/nextinit/myapp/tailwind.config.ts .)",
+      "Bash(cp /tmp/nextinit/myapp/next-env.d.ts .)",
+      "Bash(cp /tmp/nextinit/myapp/package-lock.json .)",
+      "Bash(npm install:*)",
+      "Bash(npx shadcn@latest:*)",
+      "Bash(npx prisma:*)",
+      "Bash(npx next:*)",
+      "Bash(ls src/generated/prisma/index* src/generated/prisma/package*)",
+      "Bash(npm ls:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(grep -n \"PrismaClientOptions\" src/generated/prisma/internal/*.ts)",
+      "Bash(node:*)",
+      "Bash(ls /c/Users/marou/mycommunity/node_modules/next-auth/adapters*)",
+      "Bash(bash:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run:*)",
+      "Bash(npx tsx -e ':*)",
+      "Bash(npx tsx:*)",
+      "Bash(curl -s -X POST http://localhost:3001/api/auth/callback/credentials -H 'Content-Type: application/x-www-form-urlencoded' -d 'email=admin@terrastate.com&password=Admin123!&csrfToken=test&callbackUrl=http://localhost:3001' -o /dev/null -w '%{http_code}')",
+      "Bash(kill %1)",
+      "Bash(openssl rand:*)",
+      "Bash(curl:*)"
+    ]
+  }
+}
