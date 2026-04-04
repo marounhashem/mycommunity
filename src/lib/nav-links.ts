@@ -23,6 +23,8 @@ export const ownerLinks: NavLink[] = [
   { label: "My Unit", href: "/unit", icon: Home },
   { label: "My Invoices", href: "/invoices", icon: FileText },
   { label: "My Tickets", href: "/tickets", icon: Ticket },
+  { label: "Renovations", href: "/renovations", icon: HardHat },
+  { label: "Violations", href: "/violations", icon: AlertTriangle },
   { label: "Announcements", href: "/announcements", icon: Megaphone },
 ];
 

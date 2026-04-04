@@ -6,7 +6,7 @@ import { authOptions } from "@/lib/auth";
 import { r2, R2_BUCKET } from "@/lib/r2";
 import { randomUUID } from "crypto";
 
-const ALLOWED_PREFIXES = ["tickets/pending", "announcements"];
+const ALLOWED_PREFIXES = ["tickets/pending", "announcements", "renovations", "violations"];
 
 export async function POST(request: Request) {
   const session = await getServerSession(authOptions);
