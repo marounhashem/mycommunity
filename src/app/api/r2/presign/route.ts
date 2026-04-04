@@ -6,13 +6,15 @@ import { authOptions } from "@/lib/auth";
 import { r2, R2_BUCKET } from "@/lib/r2";
 import { randomUUID } from "crypto";
 
+const ALLOWED_PREFIXES = ["tickets/pending", "announcements"];
+
 export async function POST(request: Request) {
   const session = await getServerSession(authOptions);
   if (!session?.user?.id) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { filename, contentType } = await request.json();
+  const { filename, contentType, prefix } = await request.json();
 
   if (!filename || !contentType) {
     return NextResponse.json(
@@ -21,7 +23,11 @@ export async function POST(request: Request) {
     );
   }
 
-  const key = `tickets/pending/${randomUUID()}-${filename}`;
+  const resolvedPrefix = prefix && ALLOWED_PREFIXES.includes(prefix)
+    ? prefix
+    : "tickets/pending";
+
+  const key = `${resolvedPrefix}/${randomUUID()}-${filename}`;
 
   const command = new PutObjectCommand({
     Bucket: R2_BUCKET,
