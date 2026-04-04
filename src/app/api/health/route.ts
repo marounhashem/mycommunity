@@ -21,9 +21,7 @@ export async function GET() {
         hasNextAuthSecret: !!process.env.NEXTAUTH_SECRET,
         hasNextAuthUrl: !!process.env.NEXTAUTH_URL,
         nextAuthUrl: process.env.NEXTAUTH_URL || "NOT_SET",
-        dbRelatedVars: Object.keys(process.env).filter(k =>
-          k.includes("DATA") || k.includes("PG") || k.includes("POSTGRES") || k.includes("DB")
-        ),
+        allVarNames: Object.keys(process.env).sort(),
       },
     });
   } catch (error: any) {
@@ -37,9 +35,7 @@ export async function GET() {
         hasNextAuthSecret: !!process.env.NEXTAUTH_SECRET,
         hasNextAuthUrl: !!process.env.NEXTAUTH_URL,
         nextAuthUrl: process.env.NEXTAUTH_URL || "NOT_SET",
-        dbRelatedVars: Object.keys(process.env).filter(k =>
-          k.includes("DATA") || k.includes("PG") || k.includes("POSTGRES") || k.includes("DB")
-        ),
+        allVarNames: Object.keys(process.env).sort(),
       },
     });
   }
