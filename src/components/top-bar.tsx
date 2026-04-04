@@ -1,22 +1,28 @@
 "use client";
 
-import { Menu } from "lucide-react";
+import { Menu, Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
 
 interface TopBarProps {
   userName: string;
   userRole: string;
+  unreadCount?: number;
   onMenuToggle: () => void;
 }
 
-export function TopBar({ userName, userRole, onMenuToggle }: TopBarProps) {
+export function TopBar({ userName, userRole, unreadCount = 0, onMenuToggle }: TopBarProps) {
   const initials = userName
     .split(" ")
     .map((n) => n[0])
     .join("")
     .toUpperCase()
     .slice(0, 2);
+
+  const bellHref = userRole === "OWNER"
+    ? "/owner/announcements"
+    : "/manager/announcements";
 
   return (
     <header className="flex h-14 items-center justify-between bg-crimson px-4 md:px-6">
@@ -43,6 +49,14 @@ export function TopBar({ userName, userRole, onMenuToggle }: TopBarProps) {
         </div>
       </div>
       <div className="flex items-center gap-2.5">
+        <Link href={bellHref} className="relative text-white hover:text-white/80">
+          <Bell className="h-5 w-5" />
+          {unreadCount > 0 && (
+            <span className="absolute -top-1.5 -right-1.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-white text-[10px] font-bold text-crimson px-1">
+              {unreadCount > 99 ? "99+" : unreadCount}
+            </span>
+          )}
+        </Link>
         <Badge
           variant="secondary"
           className="bg-white/20 text-white border-none text-[10px] font-medium hover:bg-white/20"

@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { AppShell } from "@/components/app-shell";
 import { adminLinks } from "@/lib/nav-links";
+import { getUnreadCount } from "@/lib/comms/queries";
 
 export default async function AdminLayout({
   children,
@@ -12,12 +13,15 @@ export default async function AdminLayout({
   const session = await getServerSession(authOptions);
   if (!session) redirect("/login");
 
+  const unreadCount = await getUnreadCount(session.user.id);
+
   return (
     <AppShell
       links={adminLinks}
       basePath="/admin"
       userName={session.user.email ?? ""}
       userRole={session.user.role}
+      unreadCount={unreadCount}
     >
       {children}
     </AppShell>

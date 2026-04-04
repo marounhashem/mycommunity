@@ -12,9 +12,10 @@ interface AppShellProps {
   basePath: string;
   userName: string;
   userRole: string;
+  unreadCount?: number;
 }
 
-function AppShellInner({ children, links, basePath, userName, userRole }: AppShellProps) {
+function AppShellInner({ children, links, basePath, userName, userRole, unreadCount }: AppShellProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -22,6 +23,7 @@ function AppShellInner({ children, links, basePath, userName, userRole }: AppShe
       <TopBar
         userName={userName}
         userRole={userRole}
+        unreadCount={unreadCount}
         onMenuToggle={() => setSidebarOpen(true)}
       />
       <div className="flex flex-1 overflow-hidden">
