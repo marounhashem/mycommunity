@@ -17,9 +17,13 @@ export async function GET() {
       adminHasPassword: !!admin?.hashedPassword,
       envCheck: {
         hasDbUrl: !!process.env.DATABASE_URL,
+        dbUrlPrefix: process.env.DATABASE_URL?.substring(0, 20) || "NOT_SET",
         hasNextAuthSecret: !!process.env.NEXTAUTH_SECRET,
         hasNextAuthUrl: !!process.env.NEXTAUTH_URL,
         nextAuthUrl: process.env.NEXTAUTH_URL || "NOT_SET",
+        dbRelatedVars: Object.keys(process.env).filter(k =>
+          k.includes("DATA") || k.includes("PG") || k.includes("POSTGRES") || k.includes("DB")
+        ),
       },
     });
   } catch (error: any) {
@@ -29,9 +33,13 @@ export async function GET() {
       error: error.message,
       envCheck: {
         hasDbUrl: !!process.env.DATABASE_URL,
+        dbUrlPrefix: process.env.DATABASE_URL?.substring(0, 20) || "NOT_SET",
         hasNextAuthSecret: !!process.env.NEXTAUTH_SECRET,
         hasNextAuthUrl: !!process.env.NEXTAUTH_URL,
         nextAuthUrl: process.env.NEXTAUTH_URL || "NOT_SET",
+        dbRelatedVars: Object.keys(process.env).filter(k =>
+          k.includes("DATA") || k.includes("PG") || k.includes("POSTGRES") || k.includes("DB")
+        ),
       },
     });
   }
