@@ -125,10 +125,12 @@ model Ticket {
   unitId            String         @map("unit_id")
   assignedTo        String?        @map("assigned_to")
   category          String
+  description       String         @default("")
   priority          TicketPriority @default(MEDIUM)
   status            TicketStatus   @default(OPEN)
   dueDate           DateTime?      @map("due_date")
   satisfactionScore Int?           @map("satisfaction_score")
+  createdAt         DateTime       @default(now()) @map("created_at")
 
   unit        Unit              @relation(fields: [unitId], references: [id])
   assignee    User?             @relation("AssignedTickets", fields: [assignedTo], references: [id])
