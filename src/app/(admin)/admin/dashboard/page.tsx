@@ -41,6 +41,13 @@ export default async function AdminDashboard() {
     getVillaCollectionRates(),
   ]);
 
+  // Ensure all data is JSON-serializable (Decimal → number)
+  const safeGaugeData = gaugeData.map(d => ({ ...d }));
+  const safeMonthlyData = monthlyData.map(d => ({ ...d }));
+  const safeTicketData = ticketData.map(d => ({ ...d }));
+  const safeDebtorsData = debtorsData.map(d => ({ ...d }));
+  const safeVillaData = villaData.map(d => ({ ...d }));
+
   return (
     <div className="space-y-6">
       <div>
@@ -51,18 +58,18 @@ export default async function AdminDashboard() {
       <KpiCards {...kpis} />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <CollectionGauge data={gaugeData} collectionRate={kpis.collectionRate} />
-        <MonthlyPayments data={monthlyData} />
+        <CollectionGauge data={safeGaugeData} collectionRate={kpis.collectionRate} />
+        <MonthlyPayments data={safeMonthlyData} />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <BudgetTable />
-        <TicketTrend data={ticketData} />
+        <TicketTrend data={safeTicketData} />
       </div>
 
-      <DebtorsTable data={debtorsData} />
+      <DebtorsTable data={safeDebtorsData} />
 
-      <VillaCollection data={villaData} />
+      <VillaCollection data={safeVillaData} />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 
-const currentYear = new Date().getFullYear();
+// Use 2025 for demo data — change to new Date().getFullYear() for production
+const currentYear = 2025;
 
 export async function getKpis() {
   const [totalInvoices, paidInvoices, outstandingResult, openTickets, openViolations] =
