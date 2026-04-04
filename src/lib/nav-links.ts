@@ -8,6 +8,7 @@ import {
   AlertTriangle,
   Users,
   Settings,
+  Send,
   type LucideIcon,
 } from "lucide-react";
 
@@ -31,6 +32,7 @@ export const managerLinks: NavLink[] = [
   { label: "All Invoices", href: "/invoices", icon: FileText },
   { label: "All Tickets", href: "/tickets", icon: Ticket },
   { label: "Announcements", href: "/announcements", icon: Megaphone },
+  { label: "Compose", href: "/comms/new", icon: Send },
   { label: "Renovation Apps", href: "/renovations", icon: HardHat },
   { label: "Violations", href: "/violations", icon: AlertTriangle },
 ];
@@ -41,6 +43,7 @@ export const adminLinks: NavLink[] = [
   { label: "All Invoices", href: "/invoices", icon: FileText },
   { label: "All Tickets", href: "/tickets", icon: Ticket },
   { label: "Announcements", href: "/announcements", icon: Megaphone },
+  { label: "Compose", href: "/comms/new", icon: Send },
   { label: "Renovation Apps", href: "/renovations", icon: HardHat },
   { label: "Violations", href: "/violations", icon: AlertTriangle },
   { label: "User Management", href: "/users", icon: Users },
